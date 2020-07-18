@@ -2,6 +2,7 @@ package com.aby.tovisit_abhishek_c0769778_android.network;
 
 import android.os.AsyncTask;
 
+import com.aby.tovisit_abhishek_c0769778_android.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -59,7 +60,7 @@ public class GetPlacesData extends AsyncTask<Object, String, String> {
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(latLng)
                     .title(placeName + "\n" + vicinity)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.nearbyplaces));
             googleMap.addMarker(markerOptions);
 
         }

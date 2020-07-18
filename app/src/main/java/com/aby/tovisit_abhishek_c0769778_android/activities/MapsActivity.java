@@ -141,7 +141,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         {
                             FocusLocation(new LatLng(mPlace.getLat(), mPlace.getLng()));
                             mMap.addMarker(new MarkerOptions().position(new LatLng(mPlace.getLat(), mPlace.getLng()))
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.nearbyplaces))
                                     .title(mPlace.getName())).showInfoWindow();
                             userLocationMarker(userLocation);
                         }
@@ -239,7 +239,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng pos = new LatLng(mPlace.getLat(), mPlace.getLng());
             favoritePlace = mMap.addMarker(new MarkerOptions()
                     .position(pos)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.favorite))
                     .title(isEditing ? "Drag to change location" : mPlace.getName()).draggable(isEditing));
 
             Log.i(TAG, "onMapReady: marker added successfully");
@@ -302,7 +302,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onMapLongClick(LatLng latLng)
                 {
                     MarkerOptions options = new MarkerOptions().position(latLng)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
                     favoritePlace = mMap.addMarker(options);
                     favoritePlace.setTitle(getAddress(favoritePlace));
                     favoritePlace.showInfoWindow();
@@ -375,8 +376,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void showMarkerClickedAlert(String address, String distance, String duration) {
-
+    private void showMarkerClickedAlert(String address, String distance, String duration)
+    {
         AlertDialog.Builder alert = new AlertDialog.Builder(MapsActivity.this);
         final View v = LayoutInflater.from(MapsActivity.this).inflate(R.layout.markermenu, null);
         alert.setView(v);
@@ -410,24 +411,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addPolyline(options);
         }
     }
-    public String getAddress(Marker m)
-    {
-        try
-        {
-            List<Address> addresses = geocoder.getFromLocation(m.getPosition().latitude, m.getPosition().longitude,1);
-            return addresses.get(0).getAddressLine(0);
-
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-        String format = simpleDateFormat.format(new Date());
-        Log.d("MainActivity", "Current Timestamp: " + format);
-        return format;
-    }
 
     public void saveFavorite()
     {
@@ -451,6 +434,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    public String getAddress(Marker m)
+    {
+        try
+        {
+            List<Address> addresses = geocoder.getFromLocation(m.getPosition().latitude, m.getPosition().longitude,1);
+            return addresses.get(0).getAddressLine(0);
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        String format = simpleDateFormat.format(new Date());
+        Log.d("MainActivity", "Current Timestamp: " + format);
+        return format;
     }
 
     private boolean checkPermission()
@@ -493,6 +494,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
+    public void onMarkerClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.addToFvtBtn:
+                saveFavorite();
+                break;
+            case R.id.getDirBtn:
+
+                mMap.clear();
+                User = null;
+
+                String[] directionsList;
+                DataParser directionParser = new DataParser();
+                directionsList = directionParser.parseDirections(s);
+                displayDirections(directionsList);
+                startingLocation = mMap.addMarker(new MarkerOptions().position(startingLocation.getPosition())
+                        .title(startingLocation.getTitle()));
+                favoritePlace = mMap.addMarker(new MarkerOptions().position(favoritePlace.getPosition())
+                        .title(favoritePlace.getTitle()));
+                favoritePlace.showInfoWindow();
+                break;
+            default:
+                break;
+        }
+        markerClickMenu.dismiss();
+    }
+
 
     private void userLocationMarker(Location l){
 
@@ -525,38 +553,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void onMarkerClick(View view) {
-
-        switch (view.getId()) {
-
-            case R.id.addToFvtBtn:
-                saveFavorite();
-                break;
-            case R.id.getDirBtn:
-
-                mMap.clear();
-                User = null;
-
-                String[] directionsList;
-                DataParser directionParser = new DataParser();
-                directionsList = directionParser.parseDirections(s);
-                displayDirections(directionsList);
-
-                startingLocation = mMap.addMarker(new MarkerOptions().position(startingLocation.getPosition())
-                        .title(startingLocation.getTitle()));
-                        //.icon(bitmapDescriptorFromVector(this,R.drawable.start2 )));
-
-                favoritePlace = mMap.addMarker(new MarkerOptions().position(favoritePlace.getPosition())
-                        .title(favoritePlace.getTitle()));
-                        //.icon(bitmapDescriptorFromVector(this,R.drawable.destination )));
-                favoritePlace.showInfoWindow();
-                break;
-//            case R.id.setStartBtn:
-//                startL = favoritePlace;
-//                break;
-            default:
-                break;
-        }
-        markerClickMenu.dismiss();
-    }
 }
