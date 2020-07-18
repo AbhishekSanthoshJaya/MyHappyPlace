@@ -179,7 +179,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     userLocationMarker(userLocation);
                 }
             }
-
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) { }
 
@@ -314,7 +313,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else
         {
             // When the user edits a location
-            Log.i(TAG, "old data: " + favoritePlace.getPosition());
             mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                 @Override
                 public void onMarkerDragStart(Marker marker) { }
@@ -329,7 +327,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             });
 
-            //Unhinding the elements that allow user to update a location and set it as visited
+            //Unhiding the elements that allow user to update a location and set it as visited
             findViewById(R.id.editModeLayout).setVisibility(View.VISIBLE);
             final CheckBox visited = findViewById(R.id.visitedCheckBox);
             visited.setChecked(mPlace.getVisited());

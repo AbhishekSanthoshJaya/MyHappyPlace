@@ -8,12 +8,55 @@
     android:orientation="vertical"
     tools:context=".activities.MapsActivity">
 
-    <Spinner
-        android:entries="@array/nearByPlaces"
-        android:gravity="center"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/nearByPlaces"
+            android:layout_width="380dp"
+            android:layout_height="35dp"
+            android:entries="@array/nearByPlaces"
+            android:gravity="start|left" />
+
+        <Button
+            android:id="@+id/userLocationBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/zoomtouser" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/editModeLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/nearByPlaces"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <CheckBox
+            android:id="@+id/visitedCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Visited"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/updateBTN"
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded"
+            android:text="Update"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/map"
@@ -23,45 +66,17 @@
         android:layout_weight="1" />
 
     <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/editModeLayout"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/updateBTN"
-            android:layout_weight="3"/>
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/visitedCheckBox"
-            android:text="visited"/>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Spinner
-            android:entries="@array/map_types"
-            android:gravity="center"
+            android:id="@+id/mapType"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:id="@+id/mapType"/>
-
-        <Button
-            android:id="@+id/userLocationBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@android:drawable/ic_menu_mylocation" />
+            android:layout_weight="1"
+            android:entries="@array/map_types"
+            android:gravity="center" />
 
     </LinearLayout>
 
