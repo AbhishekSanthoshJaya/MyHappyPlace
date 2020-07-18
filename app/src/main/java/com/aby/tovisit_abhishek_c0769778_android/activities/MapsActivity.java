@@ -329,6 +329,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             //Unhiding the elements that allow user to update a location and set it as visited
             findViewById(R.id.editModeLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.nearByPlaces).setVisibility(View.INVISIBLE);
             final CheckBox visited = findViewById(R.id.visitedCheckBox);
             visited.setChecked(mPlace.getVisited());
             // update button
@@ -343,6 +344,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     favoritePlace.setTitle(newPlaceName);
                     favoritePlace.showInfoWindow();
                     Toast.makeText(MapsActivity.this, success ? "Updated" : "Update failed", Toast.LENGTH_SHORT).show();
+                    Intent mIntent = new Intent(MapsActivity.this, FavoritesActivity.class);
+                    startActivity(mIntent);
                 }
             });
         }
