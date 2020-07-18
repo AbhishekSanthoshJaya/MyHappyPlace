@@ -10,9 +10,10 @@
     </string-array>
     <string-array name="nearByPlaces">
         <item>Look for nearby places</item>
-        <item>Libraries</item>
-        <item>Restaurants</item>
-        <item>Banks</item>
-        <item>Pharmacies</item>
+        <item>restaurant</item>
+        <item>museum</item>
+        <item>cafe</item>
+        <item>pharmacy</item>
+        <item>bank</item>
     </string-array>
 </resources>

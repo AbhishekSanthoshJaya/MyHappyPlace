@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Place Name:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration:"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/getDirBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/dir_icon"
+            android:onClick="onMarkerClick" />
+
+        <Button
+            android:id="@+id/addToFvtBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/save_icon"
+            android:onClick="onMarkerClick"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textStyle="bold" />
+        <!--        <Button-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="@drawable/start_icon2"-->
+        <!--            android:onClick="markerClickAction"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:id="@+id/setStartBtn"/>-->
+
+    </LinearLayout>
+</LinearLayout>
