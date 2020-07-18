@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/custom_spinner"
         android:orientation="horizontal">
 
         <Spinner
@@ -31,9 +33,9 @@
         android:id="@+id/editModeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="50dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:visibility="visible">
@@ -44,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Visited"
+            android:text="Mark As Visited"
             android:textSize="18sp" />
 
         <Button
@@ -53,6 +55,8 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@drawable/rounded"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
             android:text="Update"
             android:textSize="18sp" />
 
@@ -68,6 +72,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/custom_spinner"
         android:orientation="horizontal">
 
         <Spinner
