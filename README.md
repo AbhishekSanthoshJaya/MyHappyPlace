@@ -37,3 +37,10 @@ Screenshot | Description
 * [developers.google.com](https://developers.google.com/maps/documentation/android-sdk/marker) - Working with markers in google maps
 * [medium.com](https://medium.com/@ujikit/add-icons-to-the-android-application-from-android-studio-ide-cd1af9348749) - Adding icon to an android app
 * [developers.google.com](https://developers.google.com/maps/documentation/android-sdk/polygon-tutorial) - Working with polylines and polygons
+* [stackoverflow.com](https://stackoverflow.com/questions/21635050/moving-linear-layout-down/34243413) - Working with linear layouts
+* [stackoverflow.com](https://stackoverflow.com/questions/4165414/how-to-hide-soft-keyboard-on-android-after-clicking-outside-edittext) - Dismissing keyboard
+* [stackoverflow](https://stackoverflow.com/questions/31828721/how-to-draw-a-rectangle-with-rounded-corners-using-xml/31828941) - Creating a custom xml file
+* [thetechnocafe.com](http://thetechnocafe.com/how-to-use-room-in-android-all-you-need-to-know-to-get-started/) - Working with room db
+* [developers.google.com](https://developer.android.com/training/data-storage/room) - Workign with room db 2
+* [stackoverflow.com](https://stackoverflow.com/questions/43113101/creating-markers-with-onclicklistener-that-opens-alertdialog-dynamically) - Opening dialog on marker click
+
