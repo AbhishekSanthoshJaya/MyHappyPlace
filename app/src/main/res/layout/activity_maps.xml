@@ -71,19 +71,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/custom_spinner"
-        android:orientation="horizontal">
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal">>
 
-        <Spinner
-            android:id="@+id/mapType"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/mapNone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded2"
+            android:text="None" />
+
+        <Button
+            android:id="@+id/mapStandard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded2"
+            android:text="Standard" />
+
+        <Button
+            android:id="@+id/mapTerrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded2"
+            android:text="Terrain" />
+
+        <Button
+            android:id="@+id/mapHybrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rounded2"
+            android:text="Hybrid" />
+
+        <Button
+            android:id="@+id/mapSatellite"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/map_types"
-            android:gravity="center" />
+            android:background="@drawable/rounded2"
+            android:text="Satellite" />
+
 
     </LinearLayout>
-
 
 </LinearLayout>

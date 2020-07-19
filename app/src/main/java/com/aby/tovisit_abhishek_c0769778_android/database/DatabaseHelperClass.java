@@ -77,7 +77,6 @@ public class DatabaseHelperClass extends SQLiteOpenHelper {
         cv.put(COLUMN_LAT, lat);
         cv.put(COLUMN_LNG, lng);
 
-
         return sqLiteDatabase.update(TABLE_NAME, cv, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0 ;
 
 
@@ -89,15 +88,10 @@ public class DatabaseHelperClass extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * from " + TABLE_NAME + " WHERE " +
                 COLUMN_LAT+ " =?" + " AND " + COLUMN_LNG + " =? ", new String[]{String.valueOf(lat),String.valueOf(lng)})
                 .getCount();
-
-
-
     }
 
     public boolean removePlace(int id){
-
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
         return sqLiteDatabase.delete(TABLE_NAME, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0 ;
 
     }

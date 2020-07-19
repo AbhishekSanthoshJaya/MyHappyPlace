@@ -1,6 +1,8 @@
 package com.aby.tovisit_abhishek_c0769778_android.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aby.tovisit_abhishek_c0769778_android.R;
 import com.aby.tovisit_abhishek_c0769778_android.database.DatabaseHelperClass;
@@ -53,4 +58,3 @@ public class PlaceAdapter extends ArrayAdapter {
         return v;
     }
 }
-

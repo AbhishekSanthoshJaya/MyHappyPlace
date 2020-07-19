@@ -62,7 +62,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
     private static final int REQUEST_CODE = 1;
     private static final String TAG = "MAP";
     private static final int RADIUS = 1800;
@@ -75,12 +74,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     DatabaseHelperClass mDatabase;
 
+    Button mapHybrid;
     // Location manager and listener
     LocationManager locationManager;
     LocationListener locationListener;
     Geocoder geocoder;
 
-    Spinner mapTypeSpinner, nearbySelector;
+    Spinner nearbySelector;
 
     private String place_name;
     private Object[] dataTransfer;
@@ -93,13 +93,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        //Set initial spinner values
-        mapTypeSpinner = findViewById(R.id.mapType);
-        mapTypeSpinner.setSelection(1);
-
+        mapHybrid = findViewById(R.id.mapHybrid);
         nearbySelector = findViewById(R.id.nearByPlaces);
         nearbySelector.setSelection(0);
 
+        mapHybrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            }
+        });
+
+        findViewById(R.id.mapNone).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+            }
+        });
+
+        findViewById(R.id.mapSatellite).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            }
+        });
+        findViewById(R.id.mapStandard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            }
+        });
+        findViewById(R.id.mapTerrain).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            }
+        });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -112,18 +141,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 CameraUpdater(userLocation);
             }
-        });
-
-        mapTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                mMap.setMapType(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         nearbySelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -162,8 +179,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -242,8 +258,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.favorite))
                     .title(isEditing ? "Drag to change location" : mPlace.getName()).draggable(isEditing));
 
-            Log.i(TAG, "onMapReady: marker added successfully");
-
             CameraPosition cameraPosition = CameraPosition.builder()
                     .target(pos)
                     .zoom(15)
@@ -276,10 +290,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // async
                     getDirectionData.execute(dataTransfer);
 
-                    try {
+                    try
+                    {
                         s = getDirectionData.get(WAIT_TIME, TimeUnit.SECONDS);
 
-                    } catch (ExecutionException e) {
+                    }
+                    catch (ExecutionException e)
+                    {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -300,14 +317,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 //Add new marker on long click
                 public void onMapLongClick(LatLng latLng)
-                {
-                    MarkerOptions options = new MarkerOptions().position(latLng)
-                            //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
-                    favoritePlace = mMap.addMarker(options);
-                    favoritePlace.setTitle(getAddress(favoritePlace));
-                    favoritePlace.showInfoWindow();
-                }
+                    {
+                        MarkerOptions options = new MarkerOptions().position(latLng)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+                        favoritePlace = mMap.addMarker(options);
+                        favoritePlace.setTitle(getAddress(favoritePlace));
+                        favoritePlace.showInfoWindow();
+                    }
             });
 
         }
@@ -387,8 +403,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         TextView tvDur = v.findViewById(R.id.duration);
 
         tvPlace.setText(address);
-        tvDist.setText(distance);
-        tvDur.setText(duration);
+        tvDist.setText("Is " + distance +" away");
+        tvDur.setText("Takes "+duration+ " to get here");
 
         if (mDatabase.numberOfResults(favoritePlace.getPosition().latitude, favoritePlace.getPosition().longitude)>0)
         {
@@ -484,7 +500,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    private void FocusLocation(LatLng latLng){
+    private void FocusLocation(LatLng latLng)
+    {
         CameraPosition cameraPosition = CameraPosition.builder()
                 .target(latLng)
                 .zoom(15)
@@ -521,10 +538,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerClickMenu.dismiss();
     }
 
-
-    private void userLocationMarker(Location l){
-
-        if(User != null){
+    private void userLocationMarker(Location l)
+    {
+        if(User != null)
+        {
             User.remove();
             User = null;
         }
@@ -533,7 +550,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startingLocation = mMap.addMarker(new MarkerOptions()
                         .position(home)
                         .title("Current User Location")
-                .icon(bitmapDescriptorFromVector(this, R.drawable.userlocation))
+                //.icon(bitmapDescriptorFromVector(this, R.drawable.userlocation))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.userlocation2))
 
         );
         User = startingLocation;
@@ -541,16 +559,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @SuppressLint("MissingPermission")
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        if (requestCode == REQUEST_CODE)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 setUpActivity();
-
-            }else{
-
-                Toast.makeText(this, "Permission is required to access location", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+            Toast.makeText(this, "Permission is required to access location", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 }
