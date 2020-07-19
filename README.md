@@ -5,7 +5,7 @@
 Abhishek Santhosh Jaya
 
 ## FUNCTIONALITIES IMPLEMENTED
-The user should be able to see the user location
+* The user can see his/her location when trying to add a favorite.
 * User can see a list of saved favorite places; the user can find and save any place on the map to his/her favorite places list by long press click on the map.
 * If no information is available for a specific location, the date when that location is added as favorite place is shown on the list
 * The user can select from different types of map
