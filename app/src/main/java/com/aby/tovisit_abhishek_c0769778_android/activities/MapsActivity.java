@@ -250,8 +250,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mPlace = (Place) i.getSerializableExtra("selectedPlace");
 
         if (mPlace != null) {
-
-            Log.i(TAG, "onMapReady: Place is not null good job");
             LatLng pos = new LatLng(mPlace.getLat(), mPlace.getLng());
             favoritePlace = mMap.addMarker(new MarkerOptions()
                     .position(pos)
@@ -325,7 +323,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         favoritePlace.showInfoWindow();
                     }
             });
-
         }
         else
         {
@@ -341,6 +338,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onMarkerDragEnd(Marker marker)
                 {
                     favoritePlace = marker;
+                    marker.setTitle(getAddress(marker));
                 }
             });
 
