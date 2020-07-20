@@ -50,7 +50,8 @@ public class PlaceAdapter extends ArrayAdapter {
         final Place p = places.get(position);
         tvName.setText(p.getName());
 
-        if (p.getVisited()) {
+        if (p.getVisited())
+        {
             ImageView i = v.findViewById(R.id.placeImage);
             i.setImageResource(R.drawable.visitedplace);
             v.setBackgroundColor(Color.rgb(125, 252,116));

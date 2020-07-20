@@ -408,7 +408,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             Button b = v.findViewById(R.id.addToFvtBtn);
             b.setEnabled(false);
-            b.setText("SAVED");
+            b.setBackgroundResource(R.drawable.saved_location);
         }
         markerClickMenu = alert.create();
         markerClickMenu.show();
